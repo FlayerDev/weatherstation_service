@@ -33,8 +33,10 @@ public class SecurityConfiguration {
         http.csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/auth/**")
-                .permitAll()
+
+                .requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/weather").permitAll()
+
                 .anyRequest()
                 .authenticated()
                 .and()
