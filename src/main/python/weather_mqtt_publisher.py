@@ -8,6 +8,7 @@ import time
 # MQTT Broker Configuration
 BROKER = "localhost"  # Change if using a different broker
 PORT = 1883
+
 TOPIC = "weather/update"
 
 # Convert wind degree (0-360) to direction
