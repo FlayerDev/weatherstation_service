@@ -1,5 +1,11 @@
 package gr.hephaestus.weatherstation.service.config.security.dto;
 
+/*
+ *
+ *  @Code from GitHub repository :  https://github.com/xartokoptiko/spring-jwt-conf
+ *
+ */
+
 public class LoginResponse {
     private String token;
 

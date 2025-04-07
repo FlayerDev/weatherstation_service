@@ -1,5 +1,11 @@
 package gr.hephaestus.weatherstation.service.config;
 
+/*
+ *
+ *  @Code from GitHub repository :  https://github.com/xartokoptiko/spring-jwt-conf
+ *
+ */
+
 import gr.hephaestus.weatherstation.service.websocket.WeatherReadingWebSocketHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.*;

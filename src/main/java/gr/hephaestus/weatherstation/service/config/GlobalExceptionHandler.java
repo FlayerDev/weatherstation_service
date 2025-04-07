@@ -1,5 +1,11 @@
 package gr.hephaestus.weatherstation.service.config;
 
+/*
+ *
+ *  @Code from GitHub repository :  https://github.com/xartokoptiko/spring-jwt-conf
+ *
+ */
+
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;

@@ -1,5 +1,11 @@
 package gr.hephaestus.weatherstation.service.config.security.entities;
 
+/*
+ *
+ *  @Code from GitHub repository :  https://github.com/xartokoptiko/spring-jwt-conf
+ *
+ */
+
 import jakarta.persistence.*;
 
 @Entity

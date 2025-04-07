@@ -1,5 +1,12 @@
 package gr.hephaestus.weatherstation.service.config.security.controllers;
 
+/*
+ *
+ *  @Code from GitHub repository :  https://github.com/xartokoptiko/spring-jwt-conf
+ *
+ */
+
+
 import gr.hephaestus.weatherstation.service.config.security.entities.User;
 import gr.hephaestus.weatherstation.service.config.security.services.UserService;
 import org.springframework.http.ResponseEntity;

@@ -1,5 +1,11 @@
 package gr.hephaestus.weatherstation.service.config.security.services;
 
+/*
+ *
+ *  @Code from GitHub repository :  https://github.com/xartokoptiko/spring-jwt-conf
+ *
+ */
+
 import gr.hephaestus.weatherstation.service.config.security.entities.User;
 import gr.hephaestus.weatherstation.service.config.security.repositories.UserRepository;
 import org.springframework.stereotype.Service;
