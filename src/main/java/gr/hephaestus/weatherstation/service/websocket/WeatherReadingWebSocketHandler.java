@@ -1,5 +1,7 @@
 package gr.hephaestus.weatherstation.service.websocket;
 
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import gr.hephaestus.weatherstation.service.service.WeatherReadingService;
 import gr.hephaestus.weatherstation.service.model.WeatherReading;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,13 +39,21 @@ public class WeatherReadingWebSocketHandler extends TextWebSocketHandler {
     public void sendLiveWeatherUpdates() {
         if (!sessions.isEmpty()) {
             Optional<WeatherReading> latestReading = weatherReadingService.getLastReading();
-            try {
-                String json = objectMapper.writeValueAsString(latestReading);
-                for (WebSocketSession session : sessions) {
-                    session.sendMessage(new TextMessage(json));
+            if (latestReading.isPresent()){
+                try {
+
+                    ObjectMapper mapper = new ObjectMapper();
+                    mapper.registerModule(new JavaTimeModule());
+                    mapper.registerModule(new Jdk8Module());
+                    mapper.registerModule(new JavaTimeModule());
+
+                    String json = mapper.writeValueAsString(latestReading.get());
+                    for (WebSocketSession session : sessions) {
+                        session.sendMessage(new TextMessage(json));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }
