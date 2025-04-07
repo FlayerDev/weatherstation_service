@@ -33,6 +33,9 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private boolean enabled = false;
+
     @CreationTimestamp
     @Column(updatable = false, name = "created_at")
     private Date createdAt;
@@ -100,6 +103,10 @@ public class User implements UserDetails {
 
     public String getFullName() {
         return fullName;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public void setFullName(String fullName) {

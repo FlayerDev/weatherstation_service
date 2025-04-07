@@ -118,6 +118,13 @@
 		</dependency>
 
 
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+			<version>3.4.4</version>
+		</dependency>
+
 		<!--	for sockets strings	-->
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
