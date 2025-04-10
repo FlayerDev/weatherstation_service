@@ -63,16 +63,62 @@ public class AuthenticationController {
 
     @GetMapping("/activate")
     public ResponseEntity<String> activateUser(@RequestParam("token") String token) {
-        VerificationToken verificationToken = verificationTokenRepository.findByToken(token)
-                .orElseThrow(() -> new RuntimeException("Invalid activation token"));
+        try {
+            VerificationToken verificationToken = verificationTokenRepository.findByToken(token)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid or expired activation token."));
 
-        User user = verificationToken.getUser();
-        user.setEnabled(true);
-        userRepository.save(user);
+            User user = verificationToken.getUser();
+            if (user.isEnabled()) {
+                return ResponseEntity.ok(buildHtmlResponse("Your account is already activated 🚀"));
+            }
 
-        verificationTokenRepository.delete(verificationToken);
+            user.setEnabled(true);
+            userRepository.save(user);
+            verificationTokenRepository.delete(verificationToken);
 
-        return ResponseEntity.ok("Account activated successfully!");
+            return ResponseEntity.ok(buildHtmlResponse("🎉 Your account has been activated successfully!"));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(buildHtmlResponse("❌ Activation failed: " + e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity
+                    .internalServerError()
+                    .body(buildHtmlResponse("⚠️ Oops! Something went wrong."));
+        }
+    }
+
+    private String buildHtmlResponse(String message) {
+        return """
+        <html>
+            <head>
+                <style>
+                    body {
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        text-align: center;
+                        padding: 40px;
+                        background-color: #f4f4f4;
+                        color: #333;
+                    }
+                    .container {
+                        background: white;
+                        padding: 30px;
+                        border-radius: 10px;
+                        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                        display: inline-block;
+                    }
+                    h1 {
+                        color: #4CAF50;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <h1>%s</h1>
+                </div>
+            </body>
+        </html>
+        """.formatted(message);
     }
 
 }
